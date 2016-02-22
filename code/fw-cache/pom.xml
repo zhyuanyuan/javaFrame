@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.credithc</groupId>
+		<artifactId>fw-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>		
+	</parent>
+
+	<artifactId>fw-cache</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>fw-cache</name>
+	
+	<modules>
+		<module>fw-cache-common</module>
+		<module>fw-cache-impl-default</module>
+		<module>fw-cache-impl-redis</module>
+		<module>fw-cache-util-redis</module>	
+		<module>fw-cache-spring</module>
+	</modules>
+	
+	<dependencies>
+		 <!-- log(must just only like following,must exclude all other dependencies about logs) -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.logback-extensions</groupId>
+		    <artifactId>logback-ext-spring</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>
+			<!-- sub projects -->			
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-cache-common</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-cache-impl-default</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-cache-impl-redis</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>		
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-cache-util-redis</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-cache-spring</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

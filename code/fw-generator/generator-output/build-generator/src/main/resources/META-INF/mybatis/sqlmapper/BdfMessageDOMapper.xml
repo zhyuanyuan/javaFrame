@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfMessageDO">
+
+	<resultMap id="resultMap_BdfMessageDO" type="com.credithc.cas.dao.entity.BdfMessageDO">
+		<result property="id" column="id_" jdbcType="VARCHAR"/>
+		<result property="content" column="content_" jdbcType="VARCHAR"/>
+		<result property="read" column="read_" jdbcType="INTEGER"/>
+		<result property="receiver" column="receiver_" jdbcType="VARCHAR"/>
+		<result property="reply" column="reply_" jdbcType="INTEGER"/>
+		<result property="sendDate" column="send_date_" jdbcType="DATE"/>
+		<result property="sender" column="sender_" jdbcType="VARCHAR"/>
+		<result property="title" column="title_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id_,
+        	content_,
+        	read_,
+        	receiver_,
+        	reply_,
+        	send_date_,
+        	sender_,
+        	title_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id_ = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="content != null">
+				and content_ = #{content,jdbcType=VARCHAR} 
+			</if>	
+            <if test="read != null">
+				and read_ = #{read,jdbcType=INTEGER} 
+			</if>	
+            <if test="receiver != null">
+				and receiver_ = #{receiver,jdbcType=VARCHAR} 
+			</if>	
+            <if test="reply != null">
+				and reply_ = #{reply,jdbcType=INTEGER} 
+			</if>	
+            <if test="sendDate != null">
+				and send_date_ = #{sendDate,jdbcType=DATE} 
+			</if>	
+            <if test="sender != null">
+				and sender_ = #{sender,jdbcType=VARCHAR} 
+			</if>	
+            <if test="title != null">
+				and title_ = #{title,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfMessageDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO bdf_message (
+        	id_ ,
+        	content_ ,
+        	read_ ,
+        	receiver_ ,
+        	reply_ ,
+        	send_date_ ,
+        	sender_ ,
+        	title_ 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{content,jdbcType=VARCHAR },
+        	#{read,jdbcType=INTEGER },
+        	#{receiver,jdbcType=VARCHAR },
+        	#{reply,jdbcType=INTEGER },
+        	#{sendDate,jdbcType=DATE },
+        	#{sender,jdbcType=VARCHAR },
+        	#{title,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfMessageDO" >
+    <![CDATA[
+        UPDATE bdf_message SET
+	        content_ = #{content,jdbcType=VARCHAR },
+	        read_ = #{read,jdbcType=INTEGER },
+	        receiver_ = #{receiver,jdbcType=VARCHAR },
+	        reply_ = #{reply,jdbcType=INTEGER },
+	        send_date_ = #{sendDate,jdbcType=DATE },
+	        sender_ = #{sender,jdbcType=VARCHAR },
+	        title_ = #{title,jdbcType=VARCHAR }
+        WHERE 
+	        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfMessageDO">
+    <![CDATA[
+        DELETE FROM bdf_message WHERE
+        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfMessageDO" resultType="Long">
+		select count(1)
+		from bdf_message
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfMessageDO" resultMap="resultMap_BdfMessageDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_message
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfMessageDO" resultMap="resultMap_BdfMessageDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_message
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfMessageDO" resultMap="resultMap_BdfMessageDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_message
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

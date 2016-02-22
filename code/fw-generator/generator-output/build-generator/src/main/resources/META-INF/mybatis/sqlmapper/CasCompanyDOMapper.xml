@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.CasCompanyDO">
+
+	<resultMap id="resultMap_CasCompanyDO" type="com.credithc.cas.dao.entity.CasCompanyDO">
+		<result property="id" column="id" jdbcType="BIGINT"/>
+		<result property="companyId" column="company_id" jdbcType="VARCHAR"/>
+		<result property="name" column="name" jdbcType="VARCHAR"/>
+		<result property="createDate" column="create_date" jdbcType="DATE"/>
+		<result property="parentId" column="parent_id" jdbcType="VARCHAR"/>
+		<result property="type" column="type" jdbcType="VARCHAR"/>
+		<result property="desc" column="desc" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id,
+        	company_id,
+        	name,
+        	create_date,
+        	parent_id,
+        	type,
+        	desc
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id = #{id,jdbcType=BIGINT} 
+			</if>	
+            <if test="companyId != null">
+				and company_id = #{companyId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="name != null">
+				and name = #{name,jdbcType=VARCHAR} 
+			</if>	
+            <if test="createDate != null">
+				and create_date = #{createDate,jdbcType=DATE} 
+			</if>	
+            <if test="parentId != null">
+				and parent_id = #{parentId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="type != null">
+				and type = #{type,jdbcType=VARCHAR} 
+			</if>	
+            <if test="desc != null">
+				and desc = #{desc,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.CasCompanyDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO cas_company (
+        	id ,
+        	company_id ,
+        	name ,
+        	create_date ,
+        	parent_id ,
+        	type ,
+        	desc 
+        ) VALUES (
+        	#{id,jdbcType=BIGINT },
+        	#{companyId,jdbcType=VARCHAR },
+        	#{name,jdbcType=VARCHAR },
+        	#{createDate,jdbcType=DATE },
+        	#{parentId,jdbcType=VARCHAR },
+        	#{type,jdbcType=VARCHAR },
+        	#{desc,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.CasCompanyDO" >
+    <![CDATA[
+        UPDATE cas_company SET
+	        company_id = #{companyId,jdbcType=VARCHAR },
+	        name = #{name,jdbcType=VARCHAR },
+	        create_date = #{createDate,jdbcType=DATE },
+	        parent_id = #{parentId,jdbcType=VARCHAR },
+	        type = #{type,jdbcType=VARCHAR },
+	        desc = #{desc,jdbcType=VARCHAR }
+        WHERE 
+	        id = #{id,jdbcType=BIGINT }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.CasCompanyDO">
+    <![CDATA[
+        DELETE FROM cas_company WHERE
+        id = #{id,jdbcType=BIGINT }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.CasCompanyDO" resultType="Long">
+		select count(1)
+		from cas_company
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.CasCompanyDO" resultMap="resultMap_CasCompanyDO">
+		select
+		<include refid="Base_Column_List" />
+		from cas_company
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.CasCompanyDO" resultMap="resultMap_CasCompanyDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from cas_company
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.CasCompanyDO" resultMap="resultMap_CasCompanyDO">
+		select
+		<include refid="Base_Column_List" />
+		from cas_company
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

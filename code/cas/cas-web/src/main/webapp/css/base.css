@@ -1,0 +1,38 @@
+/*reset*/
+*{ margin:0px; padding:0px; }
+body{ font-size:12px; color:#333; background:#ffffff; font-family:Arial, "宋体";}
+html,body{ height:100%;}
+a{text-decoration:none;}
+ul,li{ list-style:none;}
+img{ border:none;}
+/* body{ overflow:hidden;} */
+body{ overflow:auto;}
+
+
+.mt7{ margin-top:7px;}
+.mt10{ margin-top:10px;}
+.mt15{ margin-top:15px;}
+.mt30{ margin-top:30px;}
+
+.ml5{ margin-left:5px;}
+.ml10{ margin-left:10px;}
+.ml15{ margin-left:15px;}
+
+.mr5{ margin-right:5px;}
+.mr15{ margin-right:15px;}
+.mr60{ margin-right:60px;}
+
+.fLeft{ float:left;}
+.fRight{ float:right;}
+.clear{ clear:both;}
+
+.tRight{ text-align:right}
+.tCenter{ text-align:center}
+
+.font646464{ color:#646464}
+.fontff0000{ color:#ff0000}
+
+a.font646464{ color:#646464; text-decoration:none;}
+a.font646464:hover{ color:#646464; text-decoration:underline;}
+
+.footnav{ height:35px; line-height:35px; text-align:center; color:#fff; background:#3a3c3b; position:absolute; width:100%; z-index:3; bottom:0px;}

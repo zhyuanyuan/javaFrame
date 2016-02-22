@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+	<substitutionProperty name="LOG_DIR" value="/logs/sample" />
+	
+	<conversionRule conversionWord="threadid"  converterClass="com.credithc.common.log.logback.ThreadIdConverter" /> 
+	
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+		<resetJUL>true</resetJUL>
+	</contextListener>
+
+	<!-- console log -->
+	<appender name="consoleRolling" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				%d{yyyy-MM-dd HH:mm:ss.SSS} [%threadid] [%file:%line] %-5level - %msg%n
+			</pattern>
+			<immediateFlush>true</immediateFlush>
+		</encoder>
+	</appender>
+
+	<!-- file log -->
+	<appender name="fileRolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_DIR}/sample.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_DIR}/sample-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>100MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%threadid] [%file:%line] %-5level - %msg%n</pattern>
+			<immediateFlush>true</immediateFlush>
+		</encoder>
+	</appender>
+	
+	<root level="INFO">
+		<appender-ref ref="fileRolling" />
+		<appender-ref ref="consoleRolling" />
+	</root>
+    
+</configuration>

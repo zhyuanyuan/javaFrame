@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+
+#login_bodybg{ background:url(../images/login/login_bodybg.jpg) no-repeat center bottom #efeff1; width:100%; height:800px;}
+#login{ position:absolute; top:50%; left:50%; margin: -210px 0 0 -170px; width:400px; overflow:hidden; }
+#login_borderbg{ background:url(../images/login/login_border.png) no-repeat; width:298px; height:306px; padding-top:34px; padding-left:52px; margin:10px auto 0 auto;}
+
+.login_font{ background:url(../images/login/login_font.png) no-repeat; width:400px; height:40px; margin:50px auto 0 auto;}
+
+.input_name{ background:url(../images/login/input_name.png) no-repeat; width:204px; height:38px; padding-left:36px; clear:both;}
+.input_key{ background:url(../images/login/input_key.png) no-repeat; width:204px; height:38px; padding-left:36px; margin-top:20px; clear:both;}
+/* .input_name input,.input_key input{ background:#fff; border:none; height:36px; line-height:36px; width:180px; float:left; margin-top:1px} */
+.input_name input,.input_key input{ background:#fff; border:none; height:32px;padding-top:4px;  width:180px; float:left; margin-top:1px} 
+.input_name a,.input_key a{ float:left; margin-top:12px; margin-left:3px;}
+
+a.button_login{ background:url(../images/login/button_login.png) no-repeat; width:238px; height:39px; display:block; border:none;}
+a.button_login:hover{ background:url(../images/login/button_login_on.png) no-repeat;}

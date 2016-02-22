@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.sample.dao.entity.SampleDO">
+	
+	<!-- cache type="com.credithc.common.mybatis.MybatisRedisCache"/ -->
+	
+	<resultMap id="resultMap_SampleDO" type="com.credithc.sample.dao.entity.SampleDO">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="code" jdbcType="VARCHAR" property="code" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="memo" jdbcType="VARCHAR" property="memo" />
+		<result column="crt_time" jdbcType="TIMESTAMP" property="crtTime" />
+		<result column="mdf_time" jdbcType="TIMESTAMP" property="mdfTime" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+	 <![CDATA[
+	 id, code, name, memo, crt_time, mdf_time
+       ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="code != null">
+				and code = #{code,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null">
+				and name = #{name,jdbcType=VARCHAR}
+			</if>		
+			<if test="memo != null">
+				and memo = #{memo,jdbcType=VARCHAR}
+			</if>
+			<if test="crtTime != null">
+				and crt_time = #{crtTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="mdfTime != null">
+				and mdf_time = #{mdfTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</sql>
+	
+	<insert id="insert" parameterType="com.credithc.sample.dao.entity.SampleDO">
+		insert into t_sample(
+		<include refid="Base_Column_List" />
+		)
+		values(
+		  #{id,jdbcType=VARCHAR}, 
+		  #{code,jdbcType=VARCHAR},
+		  #{name,jdbcType=VARCHAR},
+		  #{memo,jdbcType=VARCHAR},
+		  #{crtTime,jdbcType=TIMESTAMP},
+		  #{mdfTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.credithc.sample.dao.entity.SampleDO">
+		update t_sample
+		set id = #{id,jdbcType=DECIMAL},
+		code = #{code,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		memo = #{memo,jdbcType=VARCHAR},
+		crt_time = #{crtTime,jdbcType=TIMESTAMP},
+		mdf_time = #{mdfTime,jdbcType=TIMESTAMP}
+		where id=#{id,jdbcType=DECIMAL}
+	</update>
+	
+	<delete id="delete"  parameterType="com.credithc.sample.dao.entity.SampleDO">
+		delete from t_sample
+		<include refid="notNullWhereClause" />
+	</delete>
+	
+	<select id="count" parameterType="com.credithc.sample.dao.entity.SampleDO" resultType="Long">
+		select count(1)
+		from t_sample
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<!-- select id="query" parameterType="com.credithc.sample.dao.entity.SampleDO" resultMap="resultMap_SampleDO" useCache="true" -->
+	<select id="query" parameterType="com.credithc.sample.dao.entity.SampleDO" resultMap="resultMap_SampleDO">
+		select
+		<include refid="Base_Column_List" />
+		from t_sample
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.sample.dao.entity.SampleDO" resultMap="resultMap_SampleDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from t_sample
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.sample.dao.entity.SampleDO" resultMap="resultMap_SampleDO">
+		select
+		<include refid="Base_Column_List" />
+		from t_sample
+		<include refid="notNullWhereClause" />
+		for update
+	</select>	
+</mapper>

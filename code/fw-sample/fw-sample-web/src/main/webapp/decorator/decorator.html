@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title><sitemesh:write property='title'/></title>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="js/decorator.js"></script>
+		<link rel="stylesheet" href="css/decorator.css" type="text/css">
+		<sitemesh:write property='head'/>
+		<script type="text/javascript">
+			 $(function () {	
+		        $("#menu-1").click(function () {
+		        	window.location.href = "menu.sf?menu=menu-1";
+		        });
+		        $("#menu-2").click(function(){
+		        	window.location.href = "menu.sf?menu=menu-2";
+		        });
+		        $("#menu-3").click(function(){
+		        	window.location.href = "menu.sf?menu=menu-3";
+		        });
+        	});
+		</script>
+	</head>
+	<body>
+		<div id="div_01">
+			<span><button id="menu-1">菜单1</button></span>
+			<span><button id="menu-2">菜单2</button></span>
+			<span><button id="menu-3">菜单3</button></span>		
+		</div>
+		<hr />
+		<div id="div_02">
+		<sitemesh:write property='body'/>
+		</div>
+		<hr />
+		<div id="div_03">this is a foot</div>
+	</body>
+</html>
+

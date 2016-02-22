@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfUrlComponentDO">
+
+	<resultMap id="resultMap_BdfUrlComponentDO" type="com.credithc.cas.dao.entity.BdfUrlComponentDO">
+		<result property="id" column="id_" jdbcType="VARCHAR"/>
+		<result property="authorityType" column="authority_type_" jdbcType="VARCHAR"/>
+		<result property="roleId" column="role_id_" jdbcType="VARCHAR"/>
+		<result property="urlId" column="url_id_" jdbcType="VARCHAR"/>
+		<result property="componentId" column="component_id_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id_,
+        	authority_type_,
+        	role_id_,
+        	url_id_,
+        	component_id_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id_ = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="authorityType != null">
+				and authority_type_ = #{authorityType,jdbcType=VARCHAR} 
+			</if>	
+            <if test="roleId != null">
+				and role_id_ = #{roleId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="urlId != null">
+				and url_id_ = #{urlId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="componentId != null">
+				and component_id_ = #{componentId,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfUrlComponentDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO bdf_url_component (
+        	id_ ,
+        	authority_type_ ,
+        	role_id_ ,
+        	url_id_ ,
+        	component_id_ 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{authorityType,jdbcType=VARCHAR },
+        	#{roleId,jdbcType=VARCHAR },
+        	#{urlId,jdbcType=VARCHAR },
+        	#{componentId,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfUrlComponentDO" >
+    <![CDATA[
+        UPDATE bdf_url_component SET
+	        authority_type_ = #{authorityType,jdbcType=VARCHAR },
+	        role_id_ = #{roleId,jdbcType=VARCHAR },
+	        url_id_ = #{urlId,jdbcType=VARCHAR },
+	        component_id_ = #{componentId,jdbcType=VARCHAR }
+        WHERE 
+	        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfUrlComponentDO">
+    <![CDATA[
+        DELETE FROM bdf_url_component WHERE
+        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfUrlComponentDO" resultType="Long">
+		select count(1)
+		from bdf_url_component
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfUrlComponentDO" resultMap="resultMap_BdfUrlComponentDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_url_component
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfUrlComponentDO" resultMap="resultMap_BdfUrlComponentDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_url_component
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfUrlComponentDO" resultMap="resultMap_BdfUrlComponentDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_url_component
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

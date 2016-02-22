@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.CasUserDO">
+
+	<resultMap id="resultMap_CasUserDO" type="com.credithc.cas.dao.entity.CasUserDO">
+		<result property="id" column="id"/>
+		<result property="userName" column="user_name"/>
+		<result property="password" column="password"/>
+		<result property="isAdmin" column="is_admin"/>
+		<result property="enabled" column="enabled"/>
+		<result property="address" column="address"/>
+		<result property="birthday" column="birthday"/>
+		<result property="cname" column="cname"/>
+		<result property="companyId" column="company_id"/>
+		<result property="email" column="email"/>
+		<result property="ename" column="ename"/>
+		<result property="male" column="male"/>
+		<result property="mobile" column="mobile"/>
+		<result property="salt" column="salt"/>
+		<result property="createDate" column="create_date"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+	    <![CDATA[
+        	id,
+        	user_name,
+        	password,
+        	is_admin,
+        	enabled,
+        	address,
+        	birthday,
+        	cname,
+        	company_id,
+        	email,
+        	ename,
+        	male,
+        	mobile,
+        	salt,
+        	create_date
+	    ]]>
+	</sql>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO cas_user (
+        	id ,
+        	user_name ,
+        	password ,
+        	is_admin ,
+        	enabled ,
+        	address ,
+        	birthday ,
+        	cname ,
+        	company_id ,
+        	email ,
+        	ename ,
+        	male ,
+        	mobile ,
+        	salt ,
+        	create_date 
+        ) VALUES (
+        	#{id} ,
+        	#{userName} ,
+        	#{password} ,
+        	#{isAdmin} ,
+        	#{enabled} ,
+        	#{address} ,
+        	#{birthday} ,
+        	#{cname} ,
+        	#{companyId} ,
+        	#{email} ,
+        	#{ename} ,
+        	#{male} ,
+        	#{mobile} ,
+        	#{salt} ,
+        	#{createDate} 
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" >
+        UPDATE cas_user SET
+        	<if test="userName != null and userName != ''">
+	        	user_name = #{userName} ,
+	        </if>
+	        <if test="password != null and password != ''">
+	        	password = #{password} ,
+	        </if>
+	        <if test="isAdmin != null">
+	        	is_admin = #{isAdmin} ,
+	        </if>
+	        <if test="enabled != null">
+	        	enabled = #{enabled} ,
+	        </if>
+	        <if test="address != null and address != ''">
+	        	address = #{address} ,
+	        </if>
+	        <if test="birthday != null">
+	        	birthday = #{birthday} ,
+	        </if>
+	        <if test="cname != null and cname != ''">
+	        	cname = #{cname} ,
+	        </if>
+	        <if test="companyId != null and companyId != ''">
+	        	company_id = #{companyId} ,
+	        </if>
+	        <if test="email != null and email != ''">
+	        	email = #{email} ,
+	        </if>
+	        <if test="ename != null and ename != ''">
+	        	ename = #{ename} ,
+	        </if>
+	        <if test="male != null">
+	        	male = #{male} ,
+	        </if>
+	        <if test="mobile != null and mobile != ''">
+	        	mobile = #{mobile} ,
+	        </if>
+	        <if test="salt != null and salt != ''">
+	        	salt = #{salt} ,
+	        </if>
+	        <if test="createDate != null">
+	        	create_date = #{createDate} ,
+	        </if>
+	        id = #{id} 
+        WHERE 
+	        id = #{id} 
+	</update>
+
+    <delete id="delete">
+    <![CDATA[
+        DELETE FROM cas_user WHERE
+        id = #{id} 
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.CasUserDO" resultType="Long">
+		select count(1) from cas_user
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.CasUserDO" resultMap="resultMap_CasUserDO">
+		select
+		<include refid="columns" />
+		from cas_user
+		where 1=1 
+		<if test="userName != null and userName != ''">
+        	and user_name = #{userName} 
+        </if>
+        <if test="password != null and password != ''">
+        	and password = #{password} 
+        </if>
+        <if test="isAdmin != null">
+        	and is_admin = #{isAdmin} 
+        </if>
+        <if test="enabled != null">
+        	and enabled = #{enabled} 
+        </if>
+        <if test="address != null and address != ''">
+        	and address = #{address} 
+        </if>
+        <if test="birthday != null">
+        	and birthday = #{birthday} 
+        </if>
+        <if test="cname != null and cname != ''">
+        	and cname = #{cname} 
+        </if>
+        <if test="companyId != null and companyId != ''">
+        	and company_id = #{companyId} 
+        </if>
+        <if test="email != null and email != ''">
+        	and email = #{email} 
+        </if>
+        <if test="ename != null and ename != ''">
+        	and ename = #{ename} 
+        </if>
+        <if test="male != null">
+        	and male = #{male} 
+        </if>
+        <if test="mobile != null and mobile != ''">
+        	and mobile = #{mobile} 
+        </if>
+        <if test="salt != null and salt != ''">
+        	and salt = #{salt} 
+        </if>
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.CasUserDO" resultMap="resultMap_CasUserDO" fetchSize="1000">
+		select
+		<include refid="columns" />
+		from cas_user
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.CasUserDO" resultMap="resultMap_CasUserDO">
+		select
+		<include refid="columns" />
+		from cas_user
+		for update
+	</select>
+	
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+    xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+           http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+           http://www.dangdang.com/schema/ddframe/reg http://www.dangdang.com/schema/ddframe/reg/reg.xsd 
+           http://www.dangdang.com/schema/ddframe/job http://www.dangdang.com/schema/ddframe/job/job.xsd
+           ">
+
+	<job:bean id="simpleJobSample" class="com.credithc.sample.core.job.SimpleJobSample"
+		regCenter="jobRegCenter" cron="0 0/1 * * * ?" shardingTotalCount="3" shardingItemParameters="0=A,1=B,2=C" />
+	<bean class="com.credithc.sample.core.job.SimpleJobSample">
+		<property name="sampleService" ref="sampleService"/>
+	</bean>
+	
+	<job:bean id="throughputDataFlowJobSample" class="com.credithc.sample.core.job.ThroughputDataFlowJobSample"
+		regCenter="jobRegCenter" cron="0 0/1 * * * ?" shardingTotalCount="3" shardingItemParameters="0=E,1=F,2=G" concurrentDataProcessThreadCount="3"/>
+	<bean class="com.credithc.sample.core.job.ThroughputDataFlowJobSample"/>
+	
+	<job:bean id="sequenceDataFlowJobSample" class="com.credithc.sample.core.job.SequenceDataFlowJobSample"
+		regCenter="jobRegCenter" cron="0 0/1 * * * ?" shardingTotalCount="3" shardingItemParameters="0=H,1=I,2=J"/>
+	<bean class="com.credithc.sample.core.job.SequenceDataFlowJobSample"/>
+      
+</beans>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+    xmlns:job="http://www.dangdang.com/schema/ddframe/job" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+           http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+           http://www.dangdang.com/schema/ddframe/reg http://www.dangdang.com/schema/ddframe/reg/reg.xsd 
+           http://www.dangdang.com/schema/ddframe/job http://www.dangdang.com/schema/ddframe/job/job.xsd
+           http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+           ">
+           
+    <!-- create query automatically -->    
+    <rabbit:queue id="queue_one" durable="true" auto-delete="false" exclusive="false" name="queue_one" />
+    <rabbit:queue id="queue_two" durable="true" auto-delete="false" exclusive="false" name="queue_two" />
+    <rabbit:queue id="queue_three" durable="true" auto-delete="false" exclusive="false" name="queue_three" />
+	<rabbit:queue id="queue_four" durable="true" auto-delete="false" exclusive="false" name="queue_four" />
+	<rabbit:queue id="queue_five" durable="true" auto-delete="false" exclusive="false" name="queue_five" />
+	<rabbit:queue id="queue_six" durable="true" auto-delete="false" exclusive="false" name="queue_six" />
+	<rabbit:queue id="queue_seven" durable="true" auto-delete="false" exclusive="false" name="queue_seven" />
+   
+   
+    <!-- create exchange automatically(direct方式 )-->
+	<rabbit:direct-exchange name="direct-mq-exchange" durable="true" auto-delete="false" id="direct-mq-exchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="queue_one" key="queue_one"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+	
+	<!-- create exchange automatically(fanout方式 )-->
+	<rabbit:fanout-exchange name="fanout-mq-exchange" durable="true" auto-delete="false" id="fanout-mq-exchange">
+		<rabbit:bindings>
+    		<rabbit:binding queue="queue_two"/>
+    		<rabbit:binding queue="queue_three"/>
+    	</rabbit:bindings>
+	</rabbit:fanout-exchange>
+
+	<!-- create exchange automatically(topic方式) -->
+	<rabbit:topic-exchange name="topic-mq-exchange" durable="true" auto-delete="false" id="topic-mq-exchange">
+		<rabbit:bindings>
+    		<rabbit:binding queue="queue_four" pattern="shanghai.*" />
+    		<rabbit:binding queue="queue_five"  pattern="beijing.*" />
+    		<rabbit:binding queue="queue_six" pattern="*.news" />
+    		<rabbit:binding queue="queue_seven"  pattern="*.football" />
+  		</rabbit:bindings>
+	</rabbit:topic-exchange>
+	
+	
+	<!-- queue litener -->
+	<bean id="queueOneLitener" class="com.credithc.sample.core.message.QueueOneListener" />
+	<bean id="queueTwoLitener" class="com.credithc.sample.core.message.QueueTwoListener" />
+	<bean id="queueThreeLitener" class="com.credithc.sample.core.message.QueueThreeListener" />
+	<bean id="queueFourLitener" class="com.credithc.sample.core.message.QueueFourListener" />
+	<bean id="queueFiveLitener" class="com.credithc.sample.core.message.QueueFiveListener" />
+	<bean id="queueSixLitener" class="com.credithc.sample.core.message.QueueSixListener" />
+	<bean id="queueSevenLitener" class="com.credithc.sample.core.message.QueueSevenListener" />
+	
+	<!-- queue container -->
+    <rabbit:listener-container connection-factory="rabbitConnectionFactory" acknowledge="auto" >
+       <rabbit:listener queues="queue_one" ref="queueOneLitener"/>
+       <rabbit:listener queues="queue_two" ref="queueTwoLitener"/>
+       <rabbit:listener queues="queue_three" ref="queueThreeLitener"/>
+       <rabbit:listener queues="queue_four" ref="queueFourLitener"/>
+       <rabbit:listener queues="queue_five" ref="queueFiveLitener"/>
+       <rabbit:listener queues="queue_six" ref="queueSixLitener"/>
+        <rabbit:listener queues="queue_six" ref="queueSevenLitener"/>
+ 	</rabbit:listener-container>
+</beans>

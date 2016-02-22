@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+     
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	  <property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 事务控制 -->
+	<!-- 
+	   事务的传播属性  
+	 REQUIRED (默认)	业务方法需要在事务中运行,如果方法运行的时候已经开启事务,就加入事务,否则创建新的事务 
+	 NOT_SUPPORTED	声明方法不需要开启事务.如果已经开启事务后调用该方法.则先挂起该事务,方法执行完毕后,事务恢复 
+	 REQUIRES_NEW	不管是否存在事务,都另行开启新的事务.如果先前已经开启事务,挂起原先事务.创建新的事务.新的事务执行结束后,恢复原先事务 
+	 MANDATORY		只能在已经存在的事务中执行,不能自行创建事务,如果在没有开启事务的环境下调用,容器抛出例外 
+	 SUPPORTS		墙头草,有事务就在事务中执行.没事务就在没事务的环境下执行 
+	 NEVER			绝对不能在事务中执行.如果执行.抛出例外  
+	 NESTED			如果有事务存在,开启一个新事务嵌套在上层事务中.开启的新事务具有自己独立的回滚点.新事务的回滚不会对外部事务造成影响,但是外部事务的提交会直接提交嵌套事务 ,如果没有事务存在,则按照REQUIRED属性执行,该属性只对DataSourceTransationManager事务管理器有效 
+	-->
+	<!-- annotation方式 
+	eg:
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor=Exception.class)  
+	public method(...){
+	...
+	}
+	-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
+    
+    <!-- xml aop方式 -->
+	<aop:config proxy-target-class="false">  
+        <aop:pointcut id="transactionPointcut" expression="execution(* com.credithc..*.*(..))"/>  
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="transactionPointcut"/>  
+    </aop:config>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">  
+		<tx:attributes>  
+			<tx:method name="xreq*" propagation="REQUIRED"/>
+			<tx:method name="xnew*" propagation="REQUIRES_NEW"/>
+			<tx:method name="xnot*" propagation="NOT_SUPPORTED"/>
+			<tx:method name="xman*" propagation="MANDATORY"/>
+			<tx:method name="xnev*" propagation="NEVER"/>
+			<tx:method name="xnes*" propagation="NESTED"/>
+			<tx:method name="xsup*" propagation="SUPPORTS"/> 
+			<tx:method name="*"     propagation="SUPPORTS"/> 
+		</tx:attributes>  
+    </tx:advice>  
+    
+    <!-- 编码式 -->
+    <!-- 参见com.credithc.common.tx.ProgrammingTxHelper -->
+	
+      
+</beans>

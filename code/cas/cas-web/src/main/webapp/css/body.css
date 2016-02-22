@@ -1,0 +1,109 @@
+@charset "utf-8";
+/* CSS Document */
+/*头部*/
+.heard_title{ background:url(../images/heard_title.jpg) no-repeat; width:389px; height:62px; float:left}
+.heard_bg{ background:#69c979; border-bottom:2px solid #3e7748; height:60px; padding-right:20px; clear:both;}
+ul.heard_nav{ overflow:hidden; display:block; float:right;}
+ul.heard_nav li{ float:right; width:60px; height:60px; text-align:center; display:block; }
+ul.heard_nav li a{ width:60px; height:52px; text-align:center; padding-top:8px;display:block; text-decoration:none; color:#fff;}
+ul.heard_nav li a.on,ul.heard_nav li a:hover{ color:#fff; background:#3e7748}
+ul.heard_nav li a span{ margin-top:6px; display:block; width:100%; font-size:12px;}
+ul.heard_nav li ul{ position:absolute; width:100px;}
+ul.heard_nav li li{ height:29px;  display:block;width:100px;border-bottom:1px solid #2a5932;}
+ul.heard_nav li li a{ color:#fff;background:#3e7748; padding-left:20px; height:29px; line-height:30px; width:80px; text-align:left; display:block; padding-top:0px; }
+ul.heard_nav li li a:hover{ color:#fff;background:#459853; }
+
+/*左边*/
+.box{ position:relative;}
+.leftBox{ width:210px; height:100%; position:relative; overflow:hidden; float:left;}
+.leftBox .sidebar{ float:left; width:200px; height:auto!important; min-height:100%; height:100%; background:#28292f}
+.leftBox .sidebar ul.nav{overflow-y:auto; width:200px;overflow-x:hidden;}
+.leftBox .sidebar ul.nav li{ width:200px;border-bottom:1px solid #1e2028; }
+.leftBox .sidebar ul.nav li a{ padding-left:36px;line-height:30px;height:30px; width:164px; display:block; text-decoration:none; background:#373b48; font-size:14px; color:#ffffff; font-weight:bold;}
+.leftBox .sidebar ul.nav li a:hover,.leftBox .sidebar ul.nav li a.on{ background:url(../images/bg/ln_nav_bg.png) no-repeat left top; padding-left:36px; width:164px;height:30px; color:#333; }
+.leftBox .sidebar ul.nav li a img{ float:left; margin-right:10px; margin-top:12px;}
+.leftBox .sidebar ul.nav li ul{ display:none;}
+.leftBox .sidebar ul.nav li li{ height:36px;}
+.leftBox .sidebar ul.nav li li a{border-bottom:1px solid #1e2028;  background:#28292f; color:#c5c7c6; font-size:12px; font-weight:normal; text-decoration:none; display:block; height:36px; line-height:36px; padding-left:40px; width:160px;}
+.leftBox .sidebar ul.nav li li a:hover,.leftBox .sidebar ul.nav li li a.on{ color:#6ed77a; background:#28292f;padding-left:40px;width:160px;height:36px; line-height:36px;}
+
+.leftBox .hidden{ float:left; width:10px; height:auto!important; min-height:100%; height:100%; background:url(../images/icon/tip_hidden.png) no-repeat left center #4a4a4a}
+.leftBox .show{ float:left; width:10px; height:auto!important; min-height:100%; height:100%; background:url(../images/icon/tip_show.png) no-repeat left center #4a4a4a}
+
+.main{ height:100%;   margin-left:210px;}
+.main_notice{ background:#3a3c3b; height:25px; text-align:right; padding-right:20px; color:#fff; line-height:25px;}
+
+/*我的工作台*/
+.nav_titletab{ padding:10px 20px 0 20px; overflow:hidden; clear:both; background:#fff;}
+.nav_titletab_left{ background:url(../images/bg/nav_tab_left_on.png) no-repeat left top; padding-left:5px; height:40px; float:left; margin-right:10px; }
+.nav_titletab_right{ background:url(../images/bg/nav_tab_right_on.png) no-repeat right top; padding-right:5px; height:40px;}
+.nav_titletab_bg{ background:url(../images/bg/nav_tab_bg_on.png) repeat-x left top; height:40px; line-height:40px; color:#333; font-size:16px; font-weight:bold; padding:0 5px; clear:both; }
+.nav_titletab_on{ padding:0 10px; background:#ffffff; float:left; height:40px; line-height:40px; color:#333; font-size:16px; font-weight:bold; padding:0 5px;}
+a.nav_titletab_off{ display:block; background:url(../images/turn_off.png) no-repeat; float:right; margin-top:15px; width:8px; height:8px; margin-left:5px;}
+
+.nav_contert{ background:#e8eef3; padding:10px 20px; height:100%}
+
+a.button_orange{ background:url(../images/bg/button_orange.png) no-repeat; width:100px; height:107px; float:left; margin:10px 10px 0 10px; display:block; text-decoration:none; color:#fff; text-align:center;}
+a.button_orange1{ background:url(../images/bg/button_orange1.png) no-repeat; width:100px; height:107px; float:left; margin:10px 10px 0 10px; display:block; text-decoration:none; color:#fff; text-align:center;}
+a.button_orange1:hover{background:url(../images/bg/button_orange1_on.png) no-repeat;}
+
+a.button_blue{ background:url(../images/bg/button_blue.png) no-repeat; width:100px; height:107px; float:left; margin:10px 10px 0 10px; display:block; text-decoration:none; color:#fff; text-align:center;}
+a.button_blue1{ background:url(../images/bg/button_blue1.png) no-repeat; width:100px; height:107px; float:left; margin:10px 10px 0 10px; display:block; text-decoration:none; color:#fff; text-align:center;}
+a.button_blue1:hover{background:url(../images/bg/button_blue1_on.png) no-repeat;}
+
+.button_font1{ font-size:20px; margin-top:20px; display:block; font-family:"方正黑体简体"}
+.button_font2{ font-size:24px; font-family:Arial; margin-top:15px;display:block;}
+
+
+.mainContent{border:1px solid #BBBBBB; background:#fff; padding:0 0 10px 0;}
+.sTable{border-top:1px solid #BBBBBB; background:#fff; }
+.sTable td{ padding:0 2px; border-bottom:1px solid #BBBBBB; text-align:center;  border-right:1px solid #BBBBBB; line-height:30px;}
+.sTable tr:hover{ background:#bcff97;}
+.sTable td h4{ text-align:center; font-size:12px;}
+
+.buttonBox{ overflow:hidden; padding-top:5px; margin-left:16px; margin-bottom:5px;}
+/*page*/
+a.page{ float:right; padding-right:10px;}
+a.pageBg{ background:#ffffff; border:1px solid #cfcfcf; padding:0 4px; height:24px; line-height:24px; float:right; display:block; color:#333; margin-right:5px;}
+a.pageBg:hover,a.currentA{ background:#cccccc}
+
+.input_border input{ border:1px solid #a9acad; background:#fff; height:26px; line-height:26px; padding:0 3px;}
+.input_border select{ border:1px solid #a9acad; background:#fff; height:26px; line-height:26px; }
+
+.input_border_red input{ border:1px solid #a9acad; background:#ffe7e7; height:26px; line-height:26px; padding:0 3px;}
+.input_border_red select{ border:1px solid #a9acad; background:#ffe7e7; height:26px; line-height:26px; }
+
+
+a.button_search{ display:block; width:68px; height:30px; background:url(../images/button_search.png) no-repeat;}
+a.button_search:hover{ display:block; width:68px; height:30px; background:url(../images/button_search_on.png) no-repeat;}
+
+a.button_rwrl{ display:block; width:86px; height:30px; background:url(../images/button_rwrl.png) no-repeat;}
+a.button_rwrl:hover{ display:block; width:86px; height:30px; background:url(../images/button_rwrl_on.png) no-repeat;}
+
+.proTitle{ background:#fdfdfd; border-bottom:1px solid #bbbbbb; border-top:3px solid #69c979; padding-left:20px; overflow:hidden;}
+.proTitle span{ float:left; height:30px; line-height:30px;color:#333; font-size:14px; font-weight:bold; }
+
+.proTitle_tableBg{ background:#f5f5f5; height:26px; border:1px solid #bbbbbb; clear:both;}
+.proTitle_tableBg span{ background:url(../images/bg/pro_titlebg.png) no-repeat right top #69c979; padding-right:14px; padding-left:10px; line-height:26px; height:26px; color:#fff; font-size:14px; float:left; display:block; font-weight:bold;}
+.proTitle_tableBg a.tip{ background:url(../images/icon/tip_up.png) no-repeat; width:16px; height:16px; float:right; margin-right:10px; display:block; margin-top:5px;}
+.proTitle_tableBg a.tip_on{ background:url(../images/icon/tip_down.png) no-repeat; width:16px; height:16px; float:right; margin-right:10px; display:block;margin-top:5px;}
+
+.xm_formRow tr{border-bottom: 1px solid #BBBBBB; }
+.xm_formRow td{ padding: 5px 5px 5px 5px; border-bottom: 1px solid #BBBBBB; border-right:1px solid #BBBBBB; height:40px;}
+
+a.button_save{ background:url(../images/button_save.png) no-repeat; width:119px; height:35px; display:block; text-align:center; color:#fff; line-height:37px;}
+a.button_save:hover{ background:url(../images/button_save_on.png) no-repeat; }
+a.button_cancel{ background:url(../images/button_cancel.png) no-repeat; width:119px; height:35px; display:block;text-align:center; color:#fff; line-height:37px;}
+a.button_cancel:hover{ background:url(../images/button_cancel_on.png) no-repeat; }
+
+
+.queryTable{ margin-left:5px;margin-top:5px;}
+.queryTable td{ padding:0px 4px 0 4px; }
+.queryTable input{height:22px; line-height:50%; background:#fff;
+}
+
+input{border: 1px solid #95b8e7;}
+
+
+.formTable td{ padding:2px 0; }
+.formTable input{height:22px; line-height:50%; }

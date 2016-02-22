@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>menu-1!</title>
+		<script type="text/javascript">
+		
+			 function del(id){
+			 		$.ajax({
+		                type: "GET",
+		                contentType: "application/json",
+		                url: "delete.do?id="+id,
+		                dataType: "text",
+		                success: function (result) {alert(result);refresh();},
+		            	error: function (XMLHttpRequest, textStatus, errorThrown) {   
+		                	alert(errorThrown);   
+						} 
+		            });	
+			 };
+			 
+			 function mod(id){
+			 	var data = new Object();
+				$.each(datasets, function (i) {
+					if(datasets[i].id==id){
+						data = datasets[i]
+					}
+				});
+				data.falge = "updates"
+				//console.info(data);
+				var sFeature = "dialogHeight=400px;dialogWidth=400px";
+				window.showModalDialog("menu1AddAndupdate.do", data, sFeature);
+			 }
+			 
+			 var datasets = new Object();
+			  
+			 function refresh(){
+			 		$.ajax({
+		                type: "GET",
+		                contentType: "application/json",
+		                url: "queryall.do",
+		                dataType: "text",
+		                success: function (result) {
+		                
+		                	datasets = jQuery.parseJSON(result);
+		                	
+		                	//console.info(datasets);
+		                	
+		                	$("#tb01").empty();
+		                	var tbHtml = "";
+		                	
+		                	$.each(datasets, function (i) {
+                				var data = datasets[i];
+		                		tbHtml += "<tr><td>"
+										  +i
+										  +"</td><td>"
+										  +data.id
+										  +"</td><td>"
+										  +data.c1
+										  +"</td><td>"
+										  +data.c2
+										  +"</td><td>"
+										  +data.c3
+										  +"</td><td>"
+										  +"<span><button id=\"btnUpdate"+i+"\" onclick=\"mod("+"'"+data.id+"'"+")\" >修改</button></span>"
+										  +"<span><button id=\"btnDelete"+i+"\" onclick=\"del("+"'"+data.id+"'"+	")\" >删除</button></span>"
+										  +"</td></tr>";
+							});
+							//alert(tbHtml);
+		               		$("#tb01").append(tbHtml);
+		                },
+		            	error: function (XMLHttpRequest, textStatus, errorThrown) {   
+		                	alert(errorThrown);   
+						} 
+		            });	
+			 }
+			 
+			 $(function () {	
+				 $("#btnQry").click(refresh);
+				 $("#btnAdd").click(function () {
+				 	//var sFeature = "center=yes;edge=raised;status=yes;";
+				 	var sFeature = "dialogHeight=400px;dialogWidth=400px";
+				 	window.showModalDialog("menu1AddAndupdate.do", this, sFeature);
+				 	
+				 });
+				 
+        	});
+		</script>
+		
+	</head>
+	<body>
+		<div>
+			<span><button id="btnQry" >查询</button></span><span><button id="btnAdd" >新增</button></span>
+		</div>
+		<div>
+		<table id="table-1" border="1">
+				<thead>
+					<th>序号</th>
+					<th>ID</th>
+					<th>column1</th>
+					<th>column2</th>
+					<th>column3</th>
+					<th>操作</th>
+				</thead>
+				<tbody id="tb01">
+					
+				</tbody>
+		</table>
+	</body>
+</html>
+

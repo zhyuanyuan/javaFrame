@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfPfValidatorEventDO">
+
+	<resultMap id="resultMap_BdfPfValidatorEventDO" type="com.credithc.cas.dao.entity.BdfPfValidatorEventDO">
+		<result property="id" column="id_" jdbcType="VARCHAR"/>
+		<result property="content" column="content_" jdbcType="VARCHAR"/>
+		<result property="name" column="name_" jdbcType="VARCHAR"/>
+		<result property="validatorId" column="validator_id_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id_,
+        	content_,
+        	name_,
+        	validator_id_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id_ = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="content != null">
+				and content_ = #{content,jdbcType=VARCHAR} 
+			</if>	
+            <if test="name != null">
+				and name_ = #{name,jdbcType=VARCHAR} 
+			</if>	
+            <if test="validatorId != null">
+				and validator_id_ = #{validatorId,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfPfValidatorEventDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO bdf_pf_validator_event (
+        	id_ ,
+        	content_ ,
+        	name_ ,
+        	validator_id_ 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{content,jdbcType=VARCHAR },
+        	#{name,jdbcType=VARCHAR },
+        	#{validatorId,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfPfValidatorEventDO" >
+    <![CDATA[
+        UPDATE bdf_pf_validator_event SET
+	        content_ = #{content,jdbcType=VARCHAR },
+	        name_ = #{name,jdbcType=VARCHAR },
+	        validator_id_ = #{validatorId,jdbcType=VARCHAR }
+        WHERE 
+	        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfPfValidatorEventDO">
+    <![CDATA[
+        DELETE FROM bdf_pf_validator_event WHERE
+        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfPfValidatorEventDO" resultType="Long">
+		select count(1)
+		from bdf_pf_validator_event
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfPfValidatorEventDO" resultMap="resultMap_BdfPfValidatorEventDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_pf_validator_event
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfPfValidatorEventDO" resultMap="resultMap_BdfPfValidatorEventDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_pf_validator_event
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfPfValidatorEventDO" resultMap="resultMap_BdfPfValidatorEventDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_pf_validator_event
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

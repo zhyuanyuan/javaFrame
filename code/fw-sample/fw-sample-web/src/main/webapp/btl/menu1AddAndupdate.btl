@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>welcome!</title>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+			$(function () {	
+				var flage = false;
+				if(dialogArguments.hasOwnProperty('id')){
+					$("#id").val(dialogArguments.id);
+					$("#c1").val(dialogArguments.c1);
+					$("#c2").val(dialogArguments.c2);
+					$("#c3").val(dialogArguments.c3);
+					flage = true;
+				}
+				 $("#btn001").click(function () {
+				 	var url = "add1.do";
+				 	if(flage) url = "update1.do";
+				 	$.post(url,  $("#testform").serialize(),
+					  function(data){
+					    alert(data);
+					    window.close();
+					    
+					});
+				 });
+        	});
+		</script>
+	</head>
+	<body>
+		<form id="testform">
+		<table>
+			<tr>
+				<th>
+					ID主键：
+				</th>
+				<th>
+					<input id='id' type="text" name='id' value=""/>
+				</th>
+			</tr>
+			<tr height="20px"></tr>
+			<tr>
+				<th>
+					column1：
+				</th>
+				<th>
+					<input id='c1' type="text" name='c1' value=""/>
+				</th>
+			</tr>
+			<tr height="20px"></tr>
+			<tr>
+				<th>
+					column2：
+				</th>
+				<th>
+					<input id='c2' type="text" name='c2' value=""/>
+				</th>
+			</tr>
+			<tr height="20px"></tr>
+			<tr>
+				<th>
+					column3：
+				</th>
+				<th>
+					<input id='c3' type="text" name='c3' value=""/>
+				</th>
+			</tr>
+			<tr height="20px"></tr>
+			<tr>
+				<th>
+				</th>
+				<th>
+					<input id="btn001" type="button" value="确定" />
+				</th>			
+			</tr>
+		</table>
+		</form>
+	</body>
+</html>
+

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfResourceAllocationDO">
+
+	<resultMap id="resultMap_BdfResourceAllocationDO" type="com.credithc.cas.dao.entity.BdfResourceAllocationDO">
+		<result property="id" column="id_" jdbcType="VARCHAR"/>
+		<result property="createDate" column="create_date_" jdbcType="DATE"/>
+		<result property="createUser" column="create_user_" jdbcType="VARCHAR"/>
+		<result property="resourceId" column="resource_id_" jdbcType="VARCHAR"/>
+		<result property="resourceOwner" column="resource_owner_" jdbcType="VARCHAR"/>
+		<result property="resourceType" column="resource_type_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id_,
+        	create_date_,
+        	create_user_,
+        	resource_id_,
+        	resource_owner_,
+        	resource_type_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id_ = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="createDate != null">
+				and create_date_ = #{createDate,jdbcType=DATE} 
+			</if>	
+            <if test="createUser != null">
+				and create_user_ = #{createUser,jdbcType=VARCHAR} 
+			</if>	
+            <if test="resourceId != null">
+				and resource_id_ = #{resourceId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="resourceOwner != null">
+				and resource_owner_ = #{resourceOwner,jdbcType=VARCHAR} 
+			</if>	
+            <if test="resourceType != null">
+				and resource_type_ = #{resourceType,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfResourceAllocationDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO bdf_resource_allocation (
+        	id_ ,
+        	create_date_ ,
+        	create_user_ ,
+        	resource_id_ ,
+        	resource_owner_ ,
+        	resource_type_ 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{createDate,jdbcType=DATE },
+        	#{createUser,jdbcType=VARCHAR },
+        	#{resourceId,jdbcType=VARCHAR },
+        	#{resourceOwner,jdbcType=VARCHAR },
+        	#{resourceType,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfResourceAllocationDO" >
+    <![CDATA[
+        UPDATE bdf_resource_allocation SET
+	        create_date_ = #{createDate,jdbcType=DATE },
+	        create_user_ = #{createUser,jdbcType=VARCHAR },
+	        resource_id_ = #{resourceId,jdbcType=VARCHAR },
+	        resource_owner_ = #{resourceOwner,jdbcType=VARCHAR },
+	        resource_type_ = #{resourceType,jdbcType=VARCHAR }
+        WHERE 
+	        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfResourceAllocationDO">
+    <![CDATA[
+        DELETE FROM bdf_resource_allocation WHERE
+        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfResourceAllocationDO" resultType="Long">
+		select count(1)
+		from bdf_resource_allocation
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfResourceAllocationDO" resultMap="resultMap_BdfResourceAllocationDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_resource_allocation
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfResourceAllocationDO" resultMap="resultMap_BdfResourceAllocationDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_resource_allocation
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfResourceAllocationDO" resultMap="resultMap_BdfResourceAllocationDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_resource_allocation
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

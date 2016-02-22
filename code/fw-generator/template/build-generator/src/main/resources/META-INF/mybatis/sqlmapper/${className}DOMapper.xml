@@ -1,0 +1,102 @@
+<#include "/macro.include"/>
+<#assign className = table.className>   
+<#assign classNameLower = className?uncap_first> 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<#macro mapperEl value>${r"#{"}${value}</#macro>
+<#macro jspEl value>${r"${"}${value}</#macro>
+<#macro namespace>${className}.</#macro>
+<mapper namespace="com.credithc.cas.dao.entity.${className}DO">
+
+	<resultMap id="resultMap_${className}DO" type="com.credithc.cas.dao.entity.${className}DO">
+	    <#list table.columns as column>
+		<result property="${column.columnNameLower}" column="${column.sqlName}" jdbcType="${column.jdbcSqlTypeName}"/>
+		</#list>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+		<#list table.columns as column>
+        	${column.sqlName}<#if column_has_next>,</#if>
+        </#list>
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+	 <#list table.columns as column>
+            <if test="${column.columnNameLower} != null">
+				and ${column.sqlName} = <@mapperEl column.columnNameFirstLower/>,jdbcType=${column.jdbcSqlTypeName}} <#if column_has_next></#if>
+			</if>	
+			</#list>     
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.${className}DO" keyProperty="${table.idColumn.columnNameFirstLower}">
+    <![CDATA[
+        INSERT INTO ${table.sqlName} (
+        <#list table.columns as column>
+        	${column.sqlName} <#if column_has_next>,</#if>
+        </#list>
+        ) VALUES (
+        <#list table.columns as column>
+        	<@mapperEl column.columnNameFirstLower/>,jdbcType=${column.jdbcSqlTypeName} }<#if column_has_next>,</#if>
+        </#list>        
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.${className}DO" >
+    <![CDATA[
+        UPDATE ${table.sqlName} SET
+	        <#list table.notPkColumns as column>
+	        ${column.sqlName} = <@mapperEl column.columnNameFirstLower/>,jdbcType=${column.jdbcSqlTypeName} }<#if column_has_next>,</#if>
+	        </#list>
+        WHERE 
+        	<#list table.compositeIdColumns as column>
+	        ${column.sqlName} = <@mapperEl column.columnNameLower/>,jdbcType=${column.jdbcSqlTypeName} }<#if column_has_next>,</#if>
+	        </#list>	        
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.${className}DO">
+    <![CDATA[
+        DELETE FROM ${table.sqlName} WHERE
+        <#list table.compositeIdColumns as column>
+        ${column.sqlName} = <@mapperEl column.columnNameLower/>,jdbcType=${column.jdbcSqlTypeName} }<#if column_has_next>,</#if>
+		</#list>
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.${className}DO" resultType="Long">
+		select count(1)
+		from ${table.sqlName}
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.${className}DO" resultMap="resultMap_${className}DO">
+		select
+		<include refid="Base_Column_List" />
+		from ${table.sqlName}
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.${className}DO" resultMap="resultMap_${className}DO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from ${table.sqlName}
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.${className}DO" resultMap="resultMap_${className}DO">
+		select
+		<include refid="Base_Column_List" />
+		from ${table.sqlName}
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

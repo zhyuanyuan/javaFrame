@@ -1,0 +1,4 @@
+<sitemesh>
+  <mapping path="/*" decorator="/decorator/decorator.html"/>
+  <mapping path="/druid/*" exclue="true"/>
+</sitemesh>

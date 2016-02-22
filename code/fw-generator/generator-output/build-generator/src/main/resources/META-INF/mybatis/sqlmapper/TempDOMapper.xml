@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.TempDO">
+
+	<resultMap id="resultMap_TempDO" type="com.credithc.cas.dao.entity.TempDO">
+		<result property="id" column="id" jdbcType="VARCHAR"/>
+		<result property="name" column="name" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id,
+        	name
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="name != null">
+				and name = #{name,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.TempDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO temp (
+        	id ,
+        	name 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{name,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.TempDO" >
+    <![CDATA[
+        UPDATE temp SET
+	        name = #{name,jdbcType=VARCHAR }
+        WHERE 
+	        id = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.TempDO">
+    <![CDATA[
+        DELETE FROM temp WHERE
+        id = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.TempDO" resultType="Long">
+		select count(1)
+		from temp
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.TempDO" resultMap="resultMap_TempDO">
+		select
+		<include refid="Base_Column_List" />
+		from temp
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.TempDO" resultMap="resultMap_TempDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from temp
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.TempDO" resultMap="resultMap_TempDO">
+		select
+		<include refid="Base_Column_List" />
+		from temp
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

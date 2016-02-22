@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfUserPositionDO">
+
+	<resultMap id="resultMap_BdfUserPositionDO" type="com.credithc.cas.dao.entity.BdfUserPositionDO">
+		<result property="id" column="id_" jdbcType="VARCHAR"/>
+		<result property="positionId" column="position_id_" jdbcType="VARCHAR"/>
+		<result property="username" column="username_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id_,
+        	position_id_,
+        	username_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id_ = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="positionId != null">
+				and position_id_ = #{positionId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="username != null">
+				and username_ = #{username,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfUserPositionDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO bdf_user_position (
+        	id_ ,
+        	position_id_ ,
+        	username_ 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{positionId,jdbcType=VARCHAR },
+        	#{username,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfUserPositionDO" >
+    <![CDATA[
+        UPDATE bdf_user_position SET
+	        position_id_ = #{positionId,jdbcType=VARCHAR },
+	        username_ = #{username,jdbcType=VARCHAR }
+        WHERE 
+	        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfUserPositionDO">
+    <![CDATA[
+        DELETE FROM bdf_user_position WHERE
+        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfUserPositionDO" resultType="Long">
+		select count(1)
+		from bdf_user_position
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfUserPositionDO" resultMap="resultMap_BdfUserPositionDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_user_position
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfUserPositionDO" resultMap="resultMap_BdfUserPositionDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_user_position
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfUserPositionDO" resultMap="resultMap_BdfUserPositionDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_user_position
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

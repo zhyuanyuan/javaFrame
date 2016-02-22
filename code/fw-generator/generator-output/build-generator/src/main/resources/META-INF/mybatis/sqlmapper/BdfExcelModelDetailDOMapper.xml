@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfExcelModelDetailDO">
+
+	<resultMap id="resultMap_BdfExcelModelDetailDO" type="com.credithc.cas.dao.entity.BdfExcelModelDetailDO">
+		<result property="id" column="id_" jdbcType="VARCHAR"/>
+		<result property="excelColumn" column="excel_column_" jdbcType="INTEGER"/>
+		<result property="excelModelId" column="excel_model_id_" jdbcType="VARCHAR"/>
+		<result property="interceptor" column="interceptor_" jdbcType="VARCHAR"/>
+		<result property="name" column="name_" jdbcType="VARCHAR"/>
+		<result property="tableColumn" column="table_column_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id_,
+        	excel_column_,
+        	excel_model_id_,
+        	interceptor_,
+        	name_,
+        	table_column_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id_ = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="excelColumn != null">
+				and excel_column_ = #{excelColumn,jdbcType=INTEGER} 
+			</if>	
+            <if test="excelModelId != null">
+				and excel_model_id_ = #{excelModelId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="interceptor != null">
+				and interceptor_ = #{interceptor,jdbcType=VARCHAR} 
+			</if>	
+            <if test="name != null">
+				and name_ = #{name,jdbcType=VARCHAR} 
+			</if>	
+            <if test="tableColumn != null">
+				and table_column_ = #{tableColumn,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfExcelModelDetailDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO bdf_excel_model_detail (
+        	id_ ,
+        	excel_column_ ,
+        	excel_model_id_ ,
+        	interceptor_ ,
+        	name_ ,
+        	table_column_ 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{excelColumn,jdbcType=INTEGER },
+        	#{excelModelId,jdbcType=VARCHAR },
+        	#{interceptor,jdbcType=VARCHAR },
+        	#{name,jdbcType=VARCHAR },
+        	#{tableColumn,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDetailDO" >
+    <![CDATA[
+        UPDATE bdf_excel_model_detail SET
+	        excel_column_ = #{excelColumn,jdbcType=INTEGER },
+	        excel_model_id_ = #{excelModelId,jdbcType=VARCHAR },
+	        interceptor_ = #{interceptor,jdbcType=VARCHAR },
+	        name_ = #{name,jdbcType=VARCHAR },
+	        table_column_ = #{tableColumn,jdbcType=VARCHAR }
+        WHERE 
+	        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDetailDO">
+    <![CDATA[
+        DELETE FROM bdf_excel_model_detail WHERE
+        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDetailDO" resultType="Long">
+		select count(1)
+		from bdf_excel_model_detail
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDetailDO" resultMap="resultMap_BdfExcelModelDetailDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_excel_model_detail
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDetailDO" resultMap="resultMap_BdfExcelModelDetailDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_excel_model_detail
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDetailDO" resultMap="resultMap_BdfExcelModelDetailDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_excel_model_detail
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

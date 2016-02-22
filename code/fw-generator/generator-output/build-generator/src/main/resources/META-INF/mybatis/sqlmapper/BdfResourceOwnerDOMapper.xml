@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfResourceOwnerDO">
+
+	<resultMap id="resultMap_BdfResourceOwnerDO" type="com.credithc.cas.dao.entity.BdfResourceOwnerDO">
+		<result property="username" column="username_" jdbcType="VARCHAR"/>
+		<result property="companyId" column="company_id_" jdbcType="VARCHAR"/>
+		<result property="createDate" column="create_date_" jdbcType="DATE"/>
+		<result property="createUser" column="create_user_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	username_,
+        	company_id_,
+        	create_date_,
+        	create_user_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="username != null">
+				and username_ = #{username,jdbcType=VARCHAR} 
+			</if>	
+            <if test="companyId != null">
+				and company_id_ = #{companyId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="createDate != null">
+				and create_date_ = #{createDate,jdbcType=DATE} 
+			</if>	
+            <if test="createUser != null">
+				and create_user_ = #{createUser,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfResourceOwnerDO" keyProperty="username">
+    <![CDATA[
+        INSERT INTO bdf_resource_owner (
+        	username_ ,
+        	company_id_ ,
+        	create_date_ ,
+        	create_user_ 
+        ) VALUES (
+        	#{username,jdbcType=VARCHAR },
+        	#{companyId,jdbcType=VARCHAR },
+        	#{createDate,jdbcType=DATE },
+        	#{createUser,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfResourceOwnerDO" >
+    <![CDATA[
+        UPDATE bdf_resource_owner SET
+	        company_id_ = #{companyId,jdbcType=VARCHAR },
+	        create_date_ = #{createDate,jdbcType=DATE },
+	        create_user_ = #{createUser,jdbcType=VARCHAR }
+        WHERE 
+	        username_ = #{username,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfResourceOwnerDO">
+    <![CDATA[
+        DELETE FROM bdf_resource_owner WHERE
+        username_ = #{username,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfResourceOwnerDO" resultType="Long">
+		select count(1)
+		from bdf_resource_owner
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfResourceOwnerDO" resultMap="resultMap_BdfResourceOwnerDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_resource_owner
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfResourceOwnerDO" resultMap="resultMap_BdfResourceOwnerDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_resource_owner
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfResourceOwnerDO" resultMap="resultMap_BdfResourceOwnerDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_resource_owner
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

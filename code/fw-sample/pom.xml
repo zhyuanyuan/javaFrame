@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.credithc</groupId>
+		<artifactId>fw-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>		
+	</parent>
+
+	<artifactId>fw-sample</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>fw-sample</name>
+	
+	<modules>
+		<module>fw-sample-facade</module>
+		<module>fw-sample-common</module>
+		<module>fw-sample-data</module>
+		<module>fw-sample-service</module>	
+		<module>fw-sample-core</module>
+		<module>fw-sample-web</module>
+		<module>fw-sample-test</module>
+	</modules>
+	
+	<properties>	
+		<com.credithc.sample.facade.version>1.0.0-SNAPSHOT</com.credithc.sample.facade.version>
+		<com.credithc.sample.common.version>1.0.0-SNAPSHOT</com.credithc.sample.common.version>
+		<com.credithc.sample.data.version>1.0.0-SNAPSHOT</com.credithc.sample.data.version>
+		<com.credithc.sample.service.version>1.0.0-SNAPSHOT</com.credithc.sample.service.version>
+		<com.credithc.sample.core.version>1.0.0-SNAPSHOT</com.credithc.sample.core.version>
+		<com.credithc.sample.web.version>1.0.0-SNAPSHOT</com.credithc.sample.web.version>
+		<com.credithc.sample.test.version>1.0.0-SNAPSHOT</com.credithc.sample.test.version>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			<!-- sub projects -->
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-sample-facade</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-sample-common</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-sample-data</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-sample-service</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-sample-core</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-sample-web</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-sample-test</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<!-- common dependencies -->
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-common</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<!-- other dependencies -->
+			
+		</dependencies>
+	</dependencyManagement>
+	
+</project>

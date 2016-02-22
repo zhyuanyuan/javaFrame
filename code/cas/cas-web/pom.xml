@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.credithc</groupId>
+		<artifactId>cas</artifactId>
+		<version>1.0.0-SNAPSHOT</version>		
+	</parent>
+
+	<artifactId>cas-web</artifactId>
+	<packaging>war</packaging>
+	<name>cas-web</name>	
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.credithc</groupId>
+			<artifactId>cas-common</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>netty-all</artifactId>
+					<groupId>io.netty</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>resteasy-netty</artifactId>
+					<groupId>org.jboss.resteasy</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>quartz</artifactId>
+					<groupId>org.opensymphony.quartz</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.credithc</groupId>
+			<artifactId>cas-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>quartz</artifactId>
+					<groupId>org.opensymphony.quartz</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.credithc</groupId>
+			<artifactId>cas-test</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-handler</artifactId>
+			<version>4.0.24.Final</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+		<dependency>
+	    	<groupId>org.springframework.security</groupId>
+	    	<artifactId>spring-security-config</artifactId>
+	    	<version>3.2.0.RELEASE</version>
+	    	<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+</project>

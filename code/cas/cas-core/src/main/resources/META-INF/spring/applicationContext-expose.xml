@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+           http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+           
+	
+    <dubbo:application name="${app_name}" owner="programmer" organization="credithc" />
+    <dubbo:registry address="${dubbo_registry_url}" timeout="10000"/>
+	<dubbo:protocol name="rest" port="8888" accepts="300" threads="200" server="tomcat" serialization="kryo" contextpath="services"/>
+	<dubbo:protocol name="dubbo" port="20880" accepts="300" threads="200" server="netty" serialization="dubbo"/>
+	<dubbo:provider protocol="dubbo,rest" retries="0" executes="200"/>
+	<dubbo:consumer retries="0"/>
+      
+      
+	<dubbo:service interface="com.credithc.cas.facade.CasUserFacade" ref="casUserFacade"/>
+</beans>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfCpCompMembDO">
+
+	<resultMap id="resultMap_BdfCpCompMembDO" type="com.credithc.cas.dao.entity.BdfCpCompMembDO">
+		<result property="id" column="id_" jdbcType="VARCHAR"/>
+		<result property="caption" column="caption_" jdbcType="VARCHAR"/>
+		<result property="colSpan" column="col_span_" jdbcType="INTEGER"/>
+		<result property="controlName" column="control_name_" jdbcType="VARCHAR"/>
+		<result property="controlType" column="control_type_" jdbcType="VARCHAR"/>
+		<result property="order" column="order_" jdbcType="INTEGER"/>
+		<result property="parentControlName" column="parent_control_name_" jdbcType="VARCHAR"/>
+		<result property="rowSpan" column="row_span_" jdbcType="INTEGER"/>
+		<result property="visible" column="visible_" jdbcType="INTEGER"/>
+		<result property="width" column="width_" jdbcType="VARCHAR"/>
+		<result property="configId" column="config_id_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id_,
+        	caption_,
+        	col_span_,
+        	control_name_,
+        	control_type_,
+        	order_,
+        	parent_control_name_,
+        	row_span_,
+        	visible_,
+        	width_,
+        	config_id_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id_ = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="caption != null">
+				and caption_ = #{caption,jdbcType=VARCHAR} 
+			</if>	
+            <if test="colSpan != null">
+				and col_span_ = #{colSpan,jdbcType=INTEGER} 
+			</if>	
+            <if test="controlName != null">
+				and control_name_ = #{controlName,jdbcType=VARCHAR} 
+			</if>	
+            <if test="controlType != null">
+				and control_type_ = #{controlType,jdbcType=VARCHAR} 
+			</if>	
+            <if test="order != null">
+				and order_ = #{order,jdbcType=INTEGER} 
+			</if>	
+            <if test="parentControlName != null">
+				and parent_control_name_ = #{parentControlName,jdbcType=VARCHAR} 
+			</if>	
+            <if test="rowSpan != null">
+				and row_span_ = #{rowSpan,jdbcType=INTEGER} 
+			</if>	
+            <if test="visible != null">
+				and visible_ = #{visible,jdbcType=INTEGER} 
+			</if>	
+            <if test="width != null">
+				and width_ = #{width,jdbcType=VARCHAR} 
+			</if>	
+            <if test="configId != null">
+				and config_id_ = #{configId,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfCpCompMembDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO bdf_cp_comp_memb (
+        	id_ ,
+        	caption_ ,
+        	col_span_ ,
+        	control_name_ ,
+        	control_type_ ,
+        	order_ ,
+        	parent_control_name_ ,
+        	row_span_ ,
+        	visible_ ,
+        	width_ ,
+        	config_id_ 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{caption,jdbcType=VARCHAR },
+        	#{colSpan,jdbcType=INTEGER },
+        	#{controlName,jdbcType=VARCHAR },
+        	#{controlType,jdbcType=VARCHAR },
+        	#{order,jdbcType=INTEGER },
+        	#{parentControlName,jdbcType=VARCHAR },
+        	#{rowSpan,jdbcType=INTEGER },
+        	#{visible,jdbcType=INTEGER },
+        	#{width,jdbcType=VARCHAR },
+        	#{configId,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfCpCompMembDO" >
+    <![CDATA[
+        UPDATE bdf_cp_comp_memb SET
+	        caption_ = #{caption,jdbcType=VARCHAR },
+	        col_span_ = #{colSpan,jdbcType=INTEGER },
+	        control_name_ = #{controlName,jdbcType=VARCHAR },
+	        control_type_ = #{controlType,jdbcType=VARCHAR },
+	        order_ = #{order,jdbcType=INTEGER },
+	        parent_control_name_ = #{parentControlName,jdbcType=VARCHAR },
+	        row_span_ = #{rowSpan,jdbcType=INTEGER },
+	        visible_ = #{visible,jdbcType=INTEGER },
+	        width_ = #{width,jdbcType=VARCHAR },
+	        config_id_ = #{configId,jdbcType=VARCHAR }
+        WHERE 
+	        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfCpCompMembDO">
+    <![CDATA[
+        DELETE FROM bdf_cp_comp_memb WHERE
+        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfCpCompMembDO" resultType="Long">
+		select count(1)
+		from bdf_cp_comp_memb
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfCpCompMembDO" resultMap="resultMap_BdfCpCompMembDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_cp_comp_memb
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfCpCompMembDO" resultMap="resultMap_BdfCpCompMembDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_cp_comp_memb
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfCpCompMembDO" resultMap="resultMap_BdfCpCompMembDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_cp_comp_memb
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

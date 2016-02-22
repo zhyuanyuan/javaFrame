@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfRoleMemberDO">
+
+	<resultMap id="resultMap_BdfRoleMemberDO" type="com.credithc.cas.dao.entity.BdfRoleMemberDO">
+		<result property="id" column="id_" jdbcType="VARCHAR"/>
+		<result property="createDate" column="create_date_" jdbcType="DATE"/>
+		<result property="deptId" column="dept_id_" jdbcType="VARCHAR"/>
+		<result property="granted" column="granted_" jdbcType="INTEGER"/>
+		<result property="positionId" column="position_id_" jdbcType="VARCHAR"/>
+		<result property="roleId" column="role_id_" jdbcType="VARCHAR"/>
+		<result property="username" column="username_" jdbcType="VARCHAR"/>
+		<result property="groupId" column="group_id_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id_,
+        	create_date_,
+        	dept_id_,
+        	granted_,
+        	position_id_,
+        	role_id_,
+        	username_,
+        	group_id_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id_ = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="createDate != null">
+				and create_date_ = #{createDate,jdbcType=DATE} 
+			</if>	
+            <if test="deptId != null">
+				and dept_id_ = #{deptId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="granted != null">
+				and granted_ = #{granted,jdbcType=INTEGER} 
+			</if>	
+            <if test="positionId != null">
+				and position_id_ = #{positionId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="roleId != null">
+				and role_id_ = #{roleId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="username != null">
+				and username_ = #{username,jdbcType=VARCHAR} 
+			</if>	
+            <if test="groupId != null">
+				and group_id_ = #{groupId,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfRoleMemberDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO bdf_role_member (
+        	id_ ,
+        	create_date_ ,
+        	dept_id_ ,
+        	granted_ ,
+        	position_id_ ,
+        	role_id_ ,
+        	username_ ,
+        	group_id_ 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{createDate,jdbcType=DATE },
+        	#{deptId,jdbcType=VARCHAR },
+        	#{granted,jdbcType=INTEGER },
+        	#{positionId,jdbcType=VARCHAR },
+        	#{roleId,jdbcType=VARCHAR },
+        	#{username,jdbcType=VARCHAR },
+        	#{groupId,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfRoleMemberDO" >
+    <![CDATA[
+        UPDATE bdf_role_member SET
+	        create_date_ = #{createDate,jdbcType=DATE },
+	        dept_id_ = #{deptId,jdbcType=VARCHAR },
+	        granted_ = #{granted,jdbcType=INTEGER },
+	        position_id_ = #{positionId,jdbcType=VARCHAR },
+	        role_id_ = #{roleId,jdbcType=VARCHAR },
+	        username_ = #{username,jdbcType=VARCHAR },
+	        group_id_ = #{groupId,jdbcType=VARCHAR }
+        WHERE 
+	        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfRoleMemberDO">
+    <![CDATA[
+        DELETE FROM bdf_role_member WHERE
+        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfRoleMemberDO" resultType="Long">
+		select count(1)
+		from bdf_role_member
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfRoleMemberDO" resultMap="resultMap_BdfRoleMemberDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_role_member
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfRoleMemberDO" resultMap="resultMap_BdfRoleMemberDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_role_member
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfRoleMemberDO" resultMap="resultMap_BdfRoleMemberDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_role_member
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

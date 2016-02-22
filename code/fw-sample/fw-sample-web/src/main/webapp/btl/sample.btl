@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/sample.js"></script>
+<link rel="stylesheet" href="css/sample.css" type="text/css">
+</head>
+<body>
+<div id="operation">
+<table>
+<tr><th>功能描述</th><th>参数</th><th>调用</th></tr>
+<tr><td>直接调用</td><td><input type="text" id='param1' value="type=1&sysid='001'&busiid='b0001'&sysseq='seq0001'"/></td><td><button type="button" onclick="sampleInvoke('1')">调用</button></td></tr>
+<tr><td>发Queue(direct)</td><td><input type="text" id='param2' value="type=2&sysid='001'&busiid='b0002'&sysseq='seq0002'"/></td><td><button type="button" onclick="sampleInvoke('2')">调用</button></td></tr>
+<tr><td>发Queue(fanout)</td><td><input type="text" id='param3' value="type=3&sysid='001'&busiid='b0003'&sysseq='seq0003'"/></td><td><button type="button" onclick="sampleInvoke('3')">调用</button></td></tr>
+<tr><td>发Queue(topic)</td><td><input type="text" id='param4' value="type=4&sysid='001'&busiid='b0004'&sysseq='seq0004'"/></td><td><button type="button" onclick="sampleInvoke('4')">调用</button></td></tr>
+<tr><td>Rest Post(delete)</td><td><input type="text" id='param5' value="type=5&sysid='001'&busiid='b0005'&sysseq='seq0005'&id=?"/></td><td><button type="button" onclick="sampleInvoke('5')">调用</button></td></tr>
+<tr><td>Rest Post(update)</td><td><input type="text" id='param6' value="type=6&sysid='001'&busiid='b0006'&sysseq='seq0006'&id=?"/></td><td><button type="button" onclick="sampleInvoke('6')">调用</button></td></tr>
+<tr><td>Rest Post(query)</td><td><input type="text" id='param7' value="type=7&sysid='001'&busiid='b0007'&sysseq='seq0007'&id=?"/></td><td><button type="button" onclick="sampleInvoke('7')">调用</button></td></tr>
+<tr><td>编程式事务(提交)</td><td><input type="text" id='param8' value="type=8&sysid='001'&busiid='b0008'&sysseq='seq0008'"/></td><td><button type="button" onclick="sampleInvoke('8')">调用</button></td></tr>
+<tr><td>编程式事务(回滚)</td><td><input type="text" id='param9' value="type=9&sysid='001'&busiid='b0009'&sysseq='seq0009'"/></td><td><button type="button" onclick="sampleInvoke('9')">调用</button></td></tr>
+<tr><td>dubbo call(mock)</td><td><input type="text" id='param10' value="type=10&sysid='001'&busiid='b0010'&sysseq='seq0010'"/></td><td><button type="button" onclick="sampleInvoke('10')">调用</button></td></tr>
+</table>
+</div>
+<div id="console"></div>
+
+<div id="crud"> 
+<div id="cond">
+<span>OP:</span><span><button id="adds">新增</button></span><span><button id="updates">编辑</button></span><span><button id="deletes">删除</button></span><br/>
+<span>ID:</span><span><input type="text" id="id" name="id"/></span>
+<span>Code:</span><span><input type="text" id="code" name="code"/></span>
+<span><button id="btnQry">查询</button></span><span><button id="btnClr">清空</button></span>
+</div>
+<div id="list">
+<table>
+<tr><th><input type="checkbox" id="chkSelectAll"/></th><th>ID</th><th>编码</th><th>名称</th><th>备注</th><th>创建时间</th><th>修改时间</th></tr>
+<%
+for(sampleBean in sampleList){
+%>
+<tr>
+<td><input type="checkbox" value="${sampleBean.id}" name="selectBox"/></td>
+<td>${sampleBean.id}</td>
+<td>${sampleBean.code}</td>
+<td>${sampleBean.name}</td>
+<td>${sampleBean.memo}</td>
+<td>${sampleBean.crtTime}</td>
+<td>${sampleBean.mdfTime}</td>
+</tr>
+<%
+}
+%>
+</table>
+</div>
+<div id="cud">
+
+
+</div>
+</div>
+</body>
+</html>
+

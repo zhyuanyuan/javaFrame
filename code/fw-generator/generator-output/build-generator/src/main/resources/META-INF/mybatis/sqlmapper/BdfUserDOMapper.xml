@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfUserDO">
+
+	<resultMap id="resultMap_BdfUserDO" type="com.credithc.cas.dao.entity.BdfUserDO">
+		<result property="username" column="username_" jdbcType="VARCHAR"/>
+		<result property="address" column="address_" jdbcType="VARCHAR"/>
+		<result property="administrator" column="administrator_" jdbcType="INTEGER"/>
+		<result property="birthday" column="birthday_" jdbcType="DATE"/>
+		<result property="cname" column="cname_" jdbcType="VARCHAR"/>
+		<result property="companyId" column="company_id_" jdbcType="VARCHAR"/>
+		<result property="createDate" column="create_date_" jdbcType="DATE"/>
+		<result property="email" column="email_" jdbcType="VARCHAR"/>
+		<result property="enabled" column="enabled_" jdbcType="INTEGER"/>
+		<result property="ename" column="ename_" jdbcType="VARCHAR"/>
+		<result property="male" column="male_" jdbcType="INTEGER"/>
+		<result property="mobile" column="mobile_" jdbcType="VARCHAR"/>
+		<result property="password" column="password_" jdbcType="VARCHAR"/>
+		<result property="salt" column="salt_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	username_,
+        	address_,
+        	administrator_,
+        	birthday_,
+        	cname_,
+        	company_id_,
+        	create_date_,
+        	email_,
+        	enabled_,
+        	ename_,
+        	male_,
+        	mobile_,
+        	password_,
+        	salt_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="username != null">
+				and username_ = #{username,jdbcType=VARCHAR} 
+			</if>	
+            <if test="address != null">
+				and address_ = #{address,jdbcType=VARCHAR} 
+			</if>	
+            <if test="administrator != null">
+				and administrator_ = #{administrator,jdbcType=INTEGER} 
+			</if>	
+            <if test="birthday != null">
+				and birthday_ = #{birthday,jdbcType=DATE} 
+			</if>	
+            <if test="cname != null">
+				and cname_ = #{cname,jdbcType=VARCHAR} 
+			</if>	
+            <if test="companyId != null">
+				and company_id_ = #{companyId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="createDate != null">
+				and create_date_ = #{createDate,jdbcType=DATE} 
+			</if>	
+            <if test="email != null">
+				and email_ = #{email,jdbcType=VARCHAR} 
+			</if>	
+            <if test="enabled != null">
+				and enabled_ = #{enabled,jdbcType=INTEGER} 
+			</if>	
+            <if test="ename != null">
+				and ename_ = #{ename,jdbcType=VARCHAR} 
+			</if>	
+            <if test="male != null">
+				and male_ = #{male,jdbcType=INTEGER} 
+			</if>	
+            <if test="mobile != null">
+				and mobile_ = #{mobile,jdbcType=VARCHAR} 
+			</if>	
+            <if test="password != null">
+				and password_ = #{password,jdbcType=VARCHAR} 
+			</if>	
+            <if test="salt != null">
+				and salt_ = #{salt,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfUserDO" keyProperty="username">
+    <![CDATA[
+        INSERT INTO bdf_user (
+        	username_ ,
+        	address_ ,
+        	administrator_ ,
+        	birthday_ ,
+        	cname_ ,
+        	company_id_ ,
+        	create_date_ ,
+        	email_ ,
+        	enabled_ ,
+        	ename_ ,
+        	male_ ,
+        	mobile_ ,
+        	password_ ,
+        	salt_ 
+        ) VALUES (
+        	#{username,jdbcType=VARCHAR },
+        	#{address,jdbcType=VARCHAR },
+        	#{administrator,jdbcType=INTEGER },
+        	#{birthday,jdbcType=DATE },
+        	#{cname,jdbcType=VARCHAR },
+        	#{companyId,jdbcType=VARCHAR },
+        	#{createDate,jdbcType=DATE },
+        	#{email,jdbcType=VARCHAR },
+        	#{enabled,jdbcType=INTEGER },
+        	#{ename,jdbcType=VARCHAR },
+        	#{male,jdbcType=INTEGER },
+        	#{mobile,jdbcType=VARCHAR },
+        	#{password,jdbcType=VARCHAR },
+        	#{salt,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfUserDO" >
+    <![CDATA[
+        UPDATE bdf_user SET
+	        address_ = #{address,jdbcType=VARCHAR },
+	        administrator_ = #{administrator,jdbcType=INTEGER },
+	        birthday_ = #{birthday,jdbcType=DATE },
+	        cname_ = #{cname,jdbcType=VARCHAR },
+	        company_id_ = #{companyId,jdbcType=VARCHAR },
+	        create_date_ = #{createDate,jdbcType=DATE },
+	        email_ = #{email,jdbcType=VARCHAR },
+	        enabled_ = #{enabled,jdbcType=INTEGER },
+	        ename_ = #{ename,jdbcType=VARCHAR },
+	        male_ = #{male,jdbcType=INTEGER },
+	        mobile_ = #{mobile,jdbcType=VARCHAR },
+	        password_ = #{password,jdbcType=VARCHAR },
+	        salt_ = #{salt,jdbcType=VARCHAR }
+        WHERE 
+	        username_ = #{username,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfUserDO">
+    <![CDATA[
+        DELETE FROM bdf_user WHERE
+        username_ = #{username,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfUserDO" resultType="Long">
+		select count(1)
+		from bdf_user
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfUserDO" resultMap="resultMap_BdfUserDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_user
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfUserDO" resultMap="resultMap_BdfUserDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_user
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfUserDO" resultMap="resultMap_BdfUserDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_user
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

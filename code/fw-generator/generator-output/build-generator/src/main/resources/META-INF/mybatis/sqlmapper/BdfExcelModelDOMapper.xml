@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfExcelModelDO">
+
+	<resultMap id="resultMap_BdfExcelModelDO" type="com.credithc.cas.dao.entity.BdfExcelModelDO">
+		<result property="id" column="id_" jdbcType="VARCHAR"/>
+		<result property="comment" column="comment_" jdbcType="VARCHAR"/>
+		<result property="companyid" column="companyid_" jdbcType="VARCHAR"/>
+		<result property="createDate" column="create_date_" jdbcType="DATE"/>
+		<result property="datasourceName" column="datasource_name_" jdbcType="VARCHAR"/>
+		<result property="dbType" column="db_type_" jdbcType="VARCHAR"/>
+		<result property="endColumn" column="end_column_" jdbcType="INTEGER"/>
+		<result property="endRow" column="end_row_" jdbcType="INTEGER"/>
+		<result property="excelSheetName" column="excel_sheet_name_" jdbcType="VARCHAR"/>
+		<result property="helpDoc" column="help_doc_" jdbcType="VARCHAR"/>
+		<result property="name" column="name_" jdbcType="VARCHAR"/>
+		<result property="primarykey" column="primarykey_" jdbcType="VARCHAR"/>
+		<result property="primarykeyType" column="primarykey_type_" jdbcType="VARCHAR"/>
+		<result property="processor" column="processor_" jdbcType="VARCHAR"/>
+		<result property="sequenceName" column="sequence_name_" jdbcType="VARCHAR"/>
+		<result property="startColumn" column="start_column_" jdbcType="INTEGER"/>
+		<result property="startRow" column="start_row_" jdbcType="INTEGER"/>
+		<result property="tableLabel" column="table_label_" jdbcType="VARCHAR"/>
+		<result property="tabelName" column="tabel_name_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id_,
+        	comment_,
+        	companyid_,
+        	create_date_,
+        	datasource_name_,
+        	db_type_,
+        	end_column_,
+        	end_row_,
+        	excel_sheet_name_,
+        	help_doc_,
+        	name_,
+        	primarykey_,
+        	primarykey_type_,
+        	processor_,
+        	sequence_name_,
+        	start_column_,
+        	start_row_,
+        	table_label_,
+        	tabel_name_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id_ = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="comment != null">
+				and comment_ = #{comment,jdbcType=VARCHAR} 
+			</if>	
+            <if test="companyid != null">
+				and companyid_ = #{companyid,jdbcType=VARCHAR} 
+			</if>	
+            <if test="createDate != null">
+				and create_date_ = #{createDate,jdbcType=DATE} 
+			</if>	
+            <if test="datasourceName != null">
+				and datasource_name_ = #{datasourceName,jdbcType=VARCHAR} 
+			</if>	
+            <if test="dbType != null">
+				and db_type_ = #{dbType,jdbcType=VARCHAR} 
+			</if>	
+            <if test="endColumn != null">
+				and end_column_ = #{endColumn,jdbcType=INTEGER} 
+			</if>	
+            <if test="endRow != null">
+				and end_row_ = #{endRow,jdbcType=INTEGER} 
+			</if>	
+            <if test="excelSheetName != null">
+				and excel_sheet_name_ = #{excelSheetName,jdbcType=VARCHAR} 
+			</if>	
+            <if test="helpDoc != null">
+				and help_doc_ = #{helpDoc,jdbcType=VARCHAR} 
+			</if>	
+            <if test="name != null">
+				and name_ = #{name,jdbcType=VARCHAR} 
+			</if>	
+            <if test="primarykey != null">
+				and primarykey_ = #{primarykey,jdbcType=VARCHAR} 
+			</if>	
+            <if test="primarykeyType != null">
+				and primarykey_type_ = #{primarykeyType,jdbcType=VARCHAR} 
+			</if>	
+            <if test="processor != null">
+				and processor_ = #{processor,jdbcType=VARCHAR} 
+			</if>	
+            <if test="sequenceName != null">
+				and sequence_name_ = #{sequenceName,jdbcType=VARCHAR} 
+			</if>	
+            <if test="startColumn != null">
+				and start_column_ = #{startColumn,jdbcType=INTEGER} 
+			</if>	
+            <if test="startRow != null">
+				and start_row_ = #{startRow,jdbcType=INTEGER} 
+			</if>	
+            <if test="tableLabel != null">
+				and table_label_ = #{tableLabel,jdbcType=VARCHAR} 
+			</if>	
+            <if test="tabelName != null">
+				and tabel_name_ = #{tabelName,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfExcelModelDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO bdf_excel_model (
+        	id_ ,
+        	comment_ ,
+        	companyid_ ,
+        	create_date_ ,
+        	datasource_name_ ,
+        	db_type_ ,
+        	end_column_ ,
+        	end_row_ ,
+        	excel_sheet_name_ ,
+        	help_doc_ ,
+        	name_ ,
+        	primarykey_ ,
+        	primarykey_type_ ,
+        	processor_ ,
+        	sequence_name_ ,
+        	start_column_ ,
+        	start_row_ ,
+        	table_label_ ,
+        	tabel_name_ 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{comment,jdbcType=VARCHAR },
+        	#{companyid,jdbcType=VARCHAR },
+        	#{createDate,jdbcType=DATE },
+        	#{datasourceName,jdbcType=VARCHAR },
+        	#{dbType,jdbcType=VARCHAR },
+        	#{endColumn,jdbcType=INTEGER },
+        	#{endRow,jdbcType=INTEGER },
+        	#{excelSheetName,jdbcType=VARCHAR },
+        	#{helpDoc,jdbcType=VARCHAR },
+        	#{name,jdbcType=VARCHAR },
+        	#{primarykey,jdbcType=VARCHAR },
+        	#{primarykeyType,jdbcType=VARCHAR },
+        	#{processor,jdbcType=VARCHAR },
+        	#{sequenceName,jdbcType=VARCHAR },
+        	#{startColumn,jdbcType=INTEGER },
+        	#{startRow,jdbcType=INTEGER },
+        	#{tableLabel,jdbcType=VARCHAR },
+        	#{tabelName,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDO" >
+    <![CDATA[
+        UPDATE bdf_excel_model SET
+	        comment_ = #{comment,jdbcType=VARCHAR },
+	        companyid_ = #{companyid,jdbcType=VARCHAR },
+	        create_date_ = #{createDate,jdbcType=DATE },
+	        datasource_name_ = #{datasourceName,jdbcType=VARCHAR },
+	        db_type_ = #{dbType,jdbcType=VARCHAR },
+	        end_column_ = #{endColumn,jdbcType=INTEGER },
+	        end_row_ = #{endRow,jdbcType=INTEGER },
+	        excel_sheet_name_ = #{excelSheetName,jdbcType=VARCHAR },
+	        help_doc_ = #{helpDoc,jdbcType=VARCHAR },
+	        name_ = #{name,jdbcType=VARCHAR },
+	        primarykey_ = #{primarykey,jdbcType=VARCHAR },
+	        primarykey_type_ = #{primarykeyType,jdbcType=VARCHAR },
+	        processor_ = #{processor,jdbcType=VARCHAR },
+	        sequence_name_ = #{sequenceName,jdbcType=VARCHAR },
+	        start_column_ = #{startColumn,jdbcType=INTEGER },
+	        start_row_ = #{startRow,jdbcType=INTEGER },
+	        table_label_ = #{tableLabel,jdbcType=VARCHAR },
+	        tabel_name_ = #{tabelName,jdbcType=VARCHAR }
+        WHERE 
+	        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDO">
+    <![CDATA[
+        DELETE FROM bdf_excel_model WHERE
+        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDO" resultType="Long">
+		select count(1)
+		from bdf_excel_model
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDO" resultMap="resultMap_BdfExcelModelDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_excel_model
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDO" resultMap="resultMap_BdfExcelModelDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_excel_model
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfExcelModelDO" resultMap="resultMap_BdfExcelModelDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_excel_model
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

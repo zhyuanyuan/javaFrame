@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.CasUserDO">
+
+	<resultMap id="resultMap_CasUserDO" type="com.credithc.cas.dao.entity.CasUserDO">
+		<result property="id" column="id" jdbcType="BIGINT"/>
+		<result property="userName" column="user_name" jdbcType="VARCHAR"/>
+		<result property="password" column="password" jdbcType="VARCHAR"/>
+		<result property="isAdmin" column="is_admin" jdbcType="BIT"/>
+		<result property="enabled" column="enabled" jdbcType="BIT"/>
+		<result property="address" column="address" jdbcType="VARCHAR"/>
+		<result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
+		<result property="cname" column="cname" jdbcType="VARCHAR"/>
+		<result property="companyId" column="company_id" jdbcType="VARCHAR"/>
+		<result property="email" column="email" jdbcType="VARCHAR"/>
+		<result property="ename" column="ename" jdbcType="VARCHAR"/>
+		<result property="male" column="male" jdbcType="BIT"/>
+		<result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+		<result property="salt" column="salt" jdbcType="VARCHAR"/>
+		<result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id,
+        	user_name,
+        	password,
+        	is_admin,
+        	enabled,
+        	address,
+        	birthday,
+        	cname,
+        	company_id,
+        	email,
+        	ename,
+        	male,
+        	mobile,
+        	salt,
+        	create_date
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id = #{id,jdbcType=BIGINT} 
+			</if>	
+            <if test="userName != null">
+				and user_name = #{userName,jdbcType=VARCHAR} 
+			</if>	
+            <if test="password != null">
+				and password = #{password,jdbcType=VARCHAR} 
+			</if>	
+            <if test="isAdmin != null">
+				and is_admin = #{isAdmin,jdbcType=BIT} 
+			</if>	
+            <if test="enabled != null">
+				and enabled = #{enabled,jdbcType=BIT} 
+			</if>	
+            <if test="address != null">
+				and address = #{address,jdbcType=VARCHAR} 
+			</if>	
+            <if test="birthday != null">
+				and birthday = #{birthday,jdbcType=TIMESTAMP} 
+			</if>	
+            <if test="cname != null">
+				and cname = #{cname,jdbcType=VARCHAR} 
+			</if>	
+            <if test="companyId != null">
+				and company_id = #{companyId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="email != null">
+				and email = #{email,jdbcType=VARCHAR} 
+			</if>	
+            <if test="ename != null">
+				and ename = #{ename,jdbcType=VARCHAR} 
+			</if>	
+            <if test="male != null">
+				and male = #{male,jdbcType=BIT} 
+			</if>	
+            <if test="mobile != null">
+				and mobile = #{mobile,jdbcType=VARCHAR} 
+			</if>	
+            <if test="salt != null">
+				and salt = #{salt,jdbcType=VARCHAR} 
+			</if>	
+            <if test="createDate != null">
+				and create_date = #{createDate,jdbcType=TIMESTAMP} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.CasUserDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO cas_user (
+        	id ,
+        	user_name ,
+        	password ,
+        	is_admin ,
+        	enabled ,
+        	address ,
+        	birthday ,
+        	cname ,
+        	company_id ,
+        	email ,
+        	ename ,
+        	male ,
+        	mobile ,
+        	salt ,
+        	create_date 
+        ) VALUES (
+        	#{id,jdbcType=BIGINT },
+        	#{userName,jdbcType=VARCHAR },
+        	#{password,jdbcType=VARCHAR },
+        	#{isAdmin,jdbcType=BIT },
+        	#{enabled,jdbcType=BIT },
+        	#{address,jdbcType=VARCHAR },
+        	#{birthday,jdbcType=TIMESTAMP },
+        	#{cname,jdbcType=VARCHAR },
+        	#{companyId,jdbcType=VARCHAR },
+        	#{email,jdbcType=VARCHAR },
+        	#{ename,jdbcType=VARCHAR },
+        	#{male,jdbcType=BIT },
+        	#{mobile,jdbcType=VARCHAR },
+        	#{salt,jdbcType=VARCHAR },
+        	#{createDate,jdbcType=TIMESTAMP }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.CasUserDO" >
+    <![CDATA[
+        UPDATE cas_user SET
+	        user_name = #{userName,jdbcType=VARCHAR },
+	        password = #{password,jdbcType=VARCHAR },
+	        is_admin = #{isAdmin,jdbcType=BIT },
+	        enabled = #{enabled,jdbcType=BIT },
+	        address = #{address,jdbcType=VARCHAR },
+	        birthday = #{birthday,jdbcType=TIMESTAMP },
+	        cname = #{cname,jdbcType=VARCHAR },
+	        company_id = #{companyId,jdbcType=VARCHAR },
+	        email = #{email,jdbcType=VARCHAR },
+	        ename = #{ename,jdbcType=VARCHAR },
+	        male = #{male,jdbcType=BIT },
+	        mobile = #{mobile,jdbcType=VARCHAR },
+	        salt = #{salt,jdbcType=VARCHAR },
+	        create_date = #{createDate,jdbcType=TIMESTAMP }
+        WHERE 
+	        id = #{id,jdbcType=BIGINT }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.CasUserDO">
+    <![CDATA[
+        DELETE FROM cas_user WHERE
+        id = #{id,jdbcType=BIGINT }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.CasUserDO" resultType="Long">
+		select count(1)
+		from cas_user
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.CasUserDO" resultMap="resultMap_CasUserDO">
+		select
+		<include refid="Base_Column_List" />
+		from cas_user
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.CasUserDO" resultMap="resultMap_CasUserDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from cas_user
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.CasUserDO" resultMap="resultMap_CasUserDO">
+		select
+		<include refid="Base_Column_List" />
+		from cas_user
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

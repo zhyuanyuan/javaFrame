@@ -1,0 +1,1 @@
+CREATE TABLE CachedObjectVersion( entity VARCHAR(255) NOT NULL PRIMARY KEY, ts LONG NOT NULL);

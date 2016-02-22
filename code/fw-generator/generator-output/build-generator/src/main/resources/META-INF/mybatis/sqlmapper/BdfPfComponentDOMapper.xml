@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credithc.cas.dao.entity.BdfPfComponentDO">
+
+	<resultMap id="resultMap_BdfPfComponentDO" type="com.credithc.cas.dao.entity.BdfPfComponentDO">
+		<result property="id" column="id_" jdbcType="VARCHAR"/>
+		<result property="assignTargetId" column="assign_target_id_" jdbcType="VARCHAR"/>
+		<result property="controlId" column="control_id_" jdbcType="VARCHAR"/>
+		<result property="type" column="type_" jdbcType="VARCHAR"/>
+		<result property="url" column="url_" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id_,
+        	assign_target_id_,
+        	control_id_,
+        	type_,
+        	url_
+	    ]]>
+	</sql>
+	
+	<sql id="notNullWhereClause">
+	<where>
+            <if test="id != null">
+				and id_ = #{id,jdbcType=VARCHAR} 
+			</if>	
+            <if test="assignTargetId != null">
+				and assign_target_id_ = #{assignTargetId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="controlId != null">
+				and control_id_ = #{controlId,jdbcType=VARCHAR} 
+			</if>	
+            <if test="type != null">
+				and type_ = #{type,jdbcType=VARCHAR} 
+			</if>	
+            <if test="url != null">
+				and url_ = #{url,jdbcType=VARCHAR} 
+			</if>	
+	</where>
+	</sql>
+	
+	
+	<insert id="insert" useGeneratedKeys="true"  parameterType="com.credithc.cas.dao.entity.BdfPfComponentDO" keyProperty="id">
+    <![CDATA[
+        INSERT INTO bdf_pf_component (
+        	id_ ,
+        	assign_target_id_ ,
+        	control_id_ ,
+        	type_ ,
+        	url_ 
+        ) VALUES (
+        	#{id,jdbcType=VARCHAR },
+        	#{assignTargetId,jdbcType=VARCHAR },
+        	#{controlId,jdbcType=VARCHAR },
+        	#{type,jdbcType=VARCHAR },
+        	#{url,jdbcType=VARCHAR }
+        )
+    ]]>	
+	</insert>
+    
+	<update id="update" parameterType="com.credithc.cas.dao.entity.BdfPfComponentDO" >
+    <![CDATA[
+        UPDATE bdf_pf_component SET
+	        assign_target_id_ = #{assignTargetId,jdbcType=VARCHAR },
+	        control_id_ = #{controlId,jdbcType=VARCHAR },
+	        type_ = #{type,jdbcType=VARCHAR },
+	        url_ = #{url,jdbcType=VARCHAR }
+        WHERE 
+	        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+	</update>
+
+    <delete id="delete" parameterType="com.credithc.cas.dao.entity.BdfPfComponentDO">
+    <![CDATA[
+        DELETE FROM bdf_pf_component WHERE
+        id_ = #{id,jdbcType=VARCHAR }
+    ]]>
+    </delete>
+	
+	<select id="count" parameterType="com.credithc.cas.dao.entity.BdfPfComponentDO" resultType="Long">
+		select count(1)
+		from bdf_pf_component
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="query" parameterType="com.credithc.cas.dao.entity.BdfPfComponentDO" resultMap="resultMap_BdfPfComponentDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_pf_component
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryIterator" parameterType="com.credithc.cas.dao.entity.BdfPfComponentDO" resultMap="resultMap_BdfPfComponentDO" fetchSize="1000">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_pf_component
+		<include refid="notNullWhereClause" />
+	</select>
+	
+	<select id="queryForLock" parameterType="com.credithc.cas.dao.entity.BdfPfComponentDO" resultMap="resultMap_BdfPfComponentDO">
+		select
+		<include refid="Base_Column_List" />
+		from bdf_pf_component
+		<include refid="notNullWhereClause" />
+		for update
+	</select>
+	
+</mapper>

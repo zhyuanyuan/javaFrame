@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.credithc</groupId>
+		<artifactId>fw-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>		
+	</parent>
+
+	<artifactId>cas</artifactId>
+	<!-- <version>1.0.0-SNAPSHOT</version> -->
+	<packaging>pom</packaging>
+	<name>cas</name>
+	
+	<modules>
+		<module>cas-facade</module>
+		<module>cas-common</module>
+		<module>cas-data</module>
+		<module>cas-service</module>	
+		<module>cas-core</module>
+		<module>cas-web</module>
+		<module>cas-test</module>
+	</modules>
+	
+	<dependencyManagement>
+		<dependencies>
+			<!-- sub projects -->
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>cas-facade</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>cas-common</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>cas-data</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>cas-service</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>cas-core</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>cas-web</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>cas-test</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<!-- common dependencies -->
+			<dependency>
+				<groupId>com.credithc</groupId>
+				<artifactId>fw-common</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<!-- other dependencies -->
+			
+		</dependencies>
+	</dependencyManagement>
+	
+</project>

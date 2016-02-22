@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.credithc.com/schema/framework/fw-cache" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tool="http://www.springframework.org/schema/tool"
+	xmlns:beans="http://www.springframework.org/schema/beans" targetNamespace="http://www.credithc.com/schema/framework/fw-cache"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:import namespace="http://www.springframework.org/schema/beans" />
+	<xsd:import namespace="http://www.springframework.org/schema/tool" />
+
+	<xsd:element name="redis-cache-provider">
+		<xsd:annotation>
+			<xsd:documentation>
+				<![CDATA[Redis Cache Provider config.]]>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="host" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[Hostname to connect to redis. Default is "localhost".]]>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="port" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[Port number to connect to redis. Default is 6379.]]>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="timeout" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[timeout for redis access in ms. Default is 2000 ms.]]>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="password" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[password to connect to redis.]]>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="database" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[The number of database in redis. Default is 0.]]>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="connection-cache-size" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[Cache size for connection with redis. Default is 2.]]>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="connection-max-size" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[max size for connection with redis. Default is 5.]]>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="default-ttl" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[default ttl, in seconds. Default is 300 seconds.]]>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="cache">
+		<xsd:annotation>
+			<xsd:documentation>
+				<![CDATA[fw-Cache module config.]]>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded" minOccurs="1">
+				<xsd:element ref="redis-cache-provider" />
+			</xsd:choice>
+			<xsd:attribute name="id" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[Unique name for this CacheWrapper used as a bean definition identifier.]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
